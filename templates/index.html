@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dự Đoán Thời Tiết</title>
+    <style>
+        body {
+            background-image: url('/static/background.jpg');
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: white;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+        img {
+            display: block;
+            margin: auto;
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dự Đoán Thời Tiết cho 7 Ngày Tới</h1>
+    
+    <h2>Biểu Đồ Phân Cụm</h2>
+    <img src="{{ url_for('static', filename='weather_plot.png') }}" alt="Biểu đồ phân cụm">
+    
+    <h2>Kết Quả Dự Đoán</h2>
+    <table>
+        <tr>
+            <th>Ngày</th>
+            <th>Nhiệt Độ Tối Thiểu (°C)</th>
+            <th>Nhiệt Độ Tối Đa (°C)</th>
+            <th>Nhiệt Độ Trung Bình (°C)</th>
+        </tr>
+        {% for prediction in predictions %}
+        <tr>
+            <td>{{ prediction[0] }}</td>
+            <td>{{ prediction[1] | round(2) }}</td>
+            <td>{{ prediction[2] | round(2) }}</td>
+            <td>{{ prediction[3] | round(2) }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
